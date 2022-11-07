@@ -1,0 +1,27 @@
+header {
+  background-color: rgb(255, 123, 0);
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 5px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 0 25px 0 black;
+}
+header * {
+  display: inline;
+}
+.nav {
+  float: right;
+  width: 70%;
+  height: 100%;
+  margin: none;
+}
+.nav-list {
+  margin: 20px;
+}
+.nav-list Link {
+  color: blue;
+  text-decoration: none;
+}
