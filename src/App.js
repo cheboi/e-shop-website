@@ -11,8 +11,8 @@ export default function App() {
       <Routes>
         <Route>
           <Route index element={<Home />} />
-          <Route path="products" element={<Products />} />
-          <Route path="categories" element={<Categories />} />
+          <Route path="products/:id" element={<Products />} />
+          <Route path="addproduct" element={<Categories />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -1,10 +1,10 @@
 header {
-  background-color: rgb(255, 123, 0);
+  background-color: rgb(0, 225, 255);
   position: fixed;
   left: 0;
   right: 0;
-  top: 5px;
-  height: 30px;
+  top: 0px;
+  height: 50px;
   display: flex;
   align-items: center;
   box-shadow: 0 0 25px 0 black;
@@ -20,8 +20,11 @@ header * {
 }
 .nav-list {
   margin: 20px;
+  float: right;
+  font-weight: bold;
+
 }
 .nav-list Link {
-  color: blue;
+  color: #fff;
   text-decoration: none;
 }

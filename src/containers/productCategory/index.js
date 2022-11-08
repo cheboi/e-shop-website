@@ -20,13 +20,12 @@ const AddProductValidation = Yup.object({
   category: Yup.string().required("Required"),
 });
 
-function Categories() {
+function AddProduct() {
   const uri = "https://fakestoreapi.com/products";
   const [category, setCategory] = React.useState([]);
   // const [value, setValue] = React.useState({ INITIAL_VALUES });
 
   const getPerCategory = () => {
-    
     axios.get(uri).then((res) => {
       // console.log(res)
       const categori = res.data;
@@ -38,9 +37,8 @@ function Categories() {
     getPerCategory();
   }, []);
 
-
   const postProductData = (values, { setSubmitting, setStatus }) => {
-    const { title, description, price, image, category } = values;
+    // const { title, description, price, image, category } = values;
     axios
       .post("https://fakestoreapi.com/products", {
         title: "",
@@ -58,7 +56,6 @@ function Categories() {
     console.log(values);
     setSubmitting(false);
   };
-  
 
   return (
     <>
@@ -91,7 +88,7 @@ function Categories() {
                 />
                 <ErrorMessage
                   name="title"
-                  className="d-block invalid-feedback"
+                  className="d-block"
                   component="span"
                 />
                 <label>description</label>
@@ -104,7 +101,7 @@ function Categories() {
                 />
                 <ErrorMessage
                   name="category"
-                  className="d-block invalid-feedback"
+                  className="d-block"
                   component="span"
                 />
                 <label>Price</label>
@@ -117,7 +114,7 @@ function Categories() {
                 />
                 <ErrorMessage
                   name="price"
-                  className="d-block invalid-feedback"
+                  className="d-block"
                   component="span"
                 />
                 <label>category</label>
@@ -144,4 +141,4 @@ function Categories() {
     </>
   );
 }
-export default Categories;
+export default AddProduct;

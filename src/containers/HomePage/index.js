@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useMemo } from "react";
 import axios from "axios";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 
-import Pagination from "../../components/Pagination/pagination.js";
+// import Pagination from "../../components/Pagination/pagination.js";
 import "./index.css";
 
 let PageSize = 5;
@@ -16,10 +16,10 @@ function Home() {
   const [currentPage, setcurrentPage] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState();
 
-  const getProducts = () => {
-    const uri = `https://fakestoreapi.com/products?limit=${query}`;
+  const uri = `https://fakestoreapi.com/products?limit=${query}`;
 
-    axios.get(uri).then((response) => {
+  const getProducts = async () => {
+    await axios.get(uri).then((response) => {
       const products = response.data;
       setProduct(products);
       setPageCount(response.nbPages);
@@ -53,7 +53,7 @@ function Home() {
 
   const deleteProduct = async (id) => {
     try {
-      const res = await axios.delete(`https://fakestoreapi.com/products/${id}`);
+      await axios.delete(`https://fakestoreapi.com/products/${id}`);
       console.log("product successfully deleted.");
       setProduct(
         product.filter((p) => {
@@ -106,13 +106,13 @@ function Home() {
             filteredList.map((data) => {
               return (
                 <div key={data.id} className="card">
-                  <img src={data.image} style={{ width: "100%" }} />
+                  <img alt="product image" src={data.image} />
                   <h3>{data.title}</h3>
                   <br />
                   <div className="price">$ {data.price}</div>
                   <br />
-                  <span>{data.description}</span>
-                  <NavLink to={`/Products/${data.id}`}>
+                  {/* <span>{data.description}</span> */}
+                  <NavLink to={`products/${data.id}`}>
                     <button> Details</button>
                   </NavLink>
                   <button onClick={() => deleteProduct(data.id)}>delete</button>
@@ -122,24 +122,24 @@ function Home() {
           ) : (
             <div></div>
           )}
-          {isLoaded ? (
-            <ReactPaginate
-              pageCount={pageCount}
-              pageRange={2}
-              marginPagesDisplayed={2}
-              onPageChange={handlePageChange}
-              containerClassName={"container"}
-              previousLinkClassName={"page"}
-              breakClassName={"page"}
-              nextLinkClassName={"page"}
-              pageClassName={"page"}
-              disabledClassNae={"disabled"}
-              activeClassName={"active"}
-            />
-          ) : (
-            <div>Nothing to display </div>
-          )}
         </div>
+        {isLoaded ? (
+          <ReactPaginate
+            pageCount={pageCount}
+            pageRange={2}
+            marginPagesDisplayed={2}
+            onPageChange={handlePageChange}
+            containerClassName={"container"}
+            previousLinkClassName={"page"}
+            breakClassName={"page"}
+            nextLinkClassName={"page"}
+            pageClassName={"page"}
+            disabledClassNae={"disabled"}
+            activeClassName={"active"}
+          />
+        ) : (
+          <div>Nothing to display </div>
+        )}
         {/* <Pagination
           className="pagination-bar"
           currentPage={currentPage}

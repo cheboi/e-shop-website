@@ -1,30 +1,40 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
+import "./index.css";
 
 const Products = () => {
   const { id } = useParams();
-  const [detail, setDetail] = useState([]);
-  console.log(id);
-
+  const [product, setProduct] = useState("");
   useEffect(() => {
-    const getProductDetail = async () => {
-      const response = await fetch(`https://fakestoreapi.com/products/${id}`);
-      const data = await response.json();
-      setDetail(data);
+    const getProductDetails = async () => {
+      const data = await axios.get(`https://fakestoreapi.com/products/${id}`);
+      // console.log(data);
+      setProduct(data.data);
     };
-    getProductDetail();
-  }, [id]);
+    getProductDetails();
+  }, []);
+
+  console.log(product);
 
   return (
-    <div>
-      <div>
-        <img alt="detail" src={detail.image} width="250" />
-        <span> in {detail.category}</span>
-        <h5>{detail.title}</h5>
-        Rating {detail.rating && detail.rating.rate}
-        <div>${detail.price}</div>
+    <div className="detail-container">
+      <h2>Products Details</h2>
+      <div className="product-detail">
+        <div className="product-image">
+          <img alt="product" src={product.image} width="400px" height={350} />
+        </div>
+        <div className="detail-description">
+          <h3>{product.category}</h3>
+          <h5>{product.title}</h5>
+          <p className="rating">
+            {" "}
+            Rating{product.rating && product.rating.rate}
+          </p>
+          <div className="price">${product.price}</div>
+          <p>{product.description}</p>
+        </div>
       </div>
-      <p>{detail.description}</p>
     </div>
   );
 };
