@@ -1,7 +1,7 @@
 .product-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  /* gap: 30; */
+  padding-top: 2%;
   width: 80%;
   margin: auto;
 }
@@ -76,4 +76,18 @@
 img {
   height: 200px;
   width: 200px;
+}
+.filter-container {
+  margin-bottom: 5px;
+  padding-left: 150px;
+  background-color: gray;
+  z-index: -900;
+  height: 0px;
+  color: white;
+  font-weight: bold;
+}
+.filter-container .category-list{
+  margin: 15px 10px;
+  color: #000;
+  padding-top: 40px;
 }

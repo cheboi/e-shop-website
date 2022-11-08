@@ -15,9 +15,9 @@ function Home() {
   const [query, setQuery] = useState();
   const [currentPage, setcurrentPage] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState();
+  const [sortState, setSortState] = useState("none");
 
   const uri = `https://fakestoreapi.com/products?limit=${query}`;
-
   const getProducts = async () => {
     await axios.get(uri).then((response) => {
       const products = response.data;
@@ -30,6 +30,25 @@ function Home() {
   useEffect(() => {
     getProducts();
   }, [query]);
+
+  const sortMethods = {
+    ascending: "https://fakestoreapi.com/products?sort=asc",
+    descending: "https://fakestoreapi.com/products?sort=desc",
+  };
+
+  const getSorted = (s) => {
+    if (s === "desc") {
+      axios.get("https://fakestoreapi.com/products?sort=desc").then((json) => {
+        setProduct(json.data);
+      });
+    } else if (s === "asc") {
+      axios.get("https://fakestoreapi.com/products?sort=asc").then((json) => {
+        setProduct(json.data);
+      });
+    } else {
+      return product;
+    }
+  };
 
   function getFilteredList() {
     if (!selectedCategory) {
@@ -90,14 +109,25 @@ function Home() {
           </div>
           <div>
             <select
-              name="category-limit"
-              id="category-limit"
+              name="category-list"
+              id="category-list"
               value={query}
               onChange={(event) => setQuery(event.target.value)}
             >
               <option value={20}>All</option>
               <option value={5}>5</option>
               <option value={10}>10</option>
+            </select>
+          </div>
+          <div>
+            <select
+              name="category-list"
+              id="category-list"
+              onChange={(event) => getSorted(event.target.value)}
+            >
+              <option value="">Default</option>
+              <option value="desc">Descending</option>
+              <option value="asc">Ascending</option>
             </select>
           </div>
         </div>

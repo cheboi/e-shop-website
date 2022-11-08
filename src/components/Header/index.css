@@ -21,8 +21,7 @@ header * {
 .nav-list {
   margin: 20px;
   float: right;
-  font-weight: bold;
-
+  font-weight: bolder;
 }
 .nav-list Link {
   color: #fff;
